@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> To-Do List</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-E7mJ8B0Q6z8Ug0B9F2dyP5Pz6F5T5t5F5u5y5q5U5G5f5f5q5+5uC5v5B5r5V5c5v5" crossorigin="anonymous">
+    <style>
+        /* Add any additional CSS styles here */
+        body {
+            background-image: url('background.jpg'); /* Add a background image */
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent background */
+            backdrop-filter: blur(5px); /* Add a blur effect to the background */
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        input[type="text"] {
+            width: 85%; /* Adjust the width to leave space for the icon */
+            padding: 12px;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+        }
+
+      
+            .pencil {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Adjust the position as needed */
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1; /* Ensure the icon is above the input */
+    width: 30px; /* Adjust the width as needed */
+    height: 30px; /* Adjust the height as needed */
+
+
+        }
+
+        input[type="text"]:focus + .pencil {
+            opacity: 1;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f2f2f2;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+
+        .quote {
+            font-size: 20px;
+            text-align: center;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .quote i {
+            margin-right: 5px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Superior To-Do List</h1>
+        <div class="input-container">
+            <input type="text" id="taskInput" placeholder="Add a new task...">
+            <img class="pencil" src="pencil.png" alt="Pencil Icon">
+        </div>
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+        <div class="quote">
+            <i class="fas fa-quote-left"></i> "The only way to do great work is to love what you do." <i class="fas fa-quote-right"></i>
+        </div>
+    </div>
+    <script>
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskText = taskInput.value.trim();
+
+            if (taskText !== "") {
+                var taskList = document.getElementById("taskList");
+                var listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <span>${taskText}</span>
+                    <button class="delete-button" onclick="removeTask(this)">Delete</button>
+                `;
+                taskList.appendChild(listItem);
+                taskInput.value = "";
+            }
+        }
+
+        function removeTask(button) {
+            var taskList = document.getElementById("taskList");
+            taskList.removeChild(button.parentElement);
+        }
+    </script>
+</body>
+</html>
